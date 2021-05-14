@@ -1,5 +1,6 @@
 import undetected_chromedriver as uc
 from sgselenium.sgselenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup as bs
 import pandas as pd
 import ssl
@@ -16,7 +17,7 @@ options.add_argument("--no-sandbox")
 options.add_argument("start-maximized")
 options.add_argument("--headless")
 uc.TARGET_VERSION = 89
-with uc.Chrome(options=options) as driver:
+with uc.Chrome(executable_path=ChromeDriverManager().install(), options=options) as driver:
     driver.get("https://www.savemart.com/stores/?coordinates=37.88151857835088,-100.44300299999999&zoom=5")
     html = driver.page_source
 
