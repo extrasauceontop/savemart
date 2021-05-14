@@ -23,6 +23,7 @@ with uc.Chrome(executable_path=ChromeDriverManager().install(), options=options)
 
     with open("file.txt", "w", encoding="utf-8") as output:
         print(html, file=output)
+    print(html)
     
     time.sleep(5)
 
