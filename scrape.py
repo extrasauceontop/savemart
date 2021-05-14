@@ -1,4 +1,3 @@
-import undetected_chromedriver as uc
 from sgselenium.sgselenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup as bs
@@ -15,9 +14,15 @@ options.add_argument("--disable-gpu")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--no-sandbox")
 options.add_argument("start-maximized")
-options.add_argument("--headless")
-uc.TARGET_VERSION = 89
-with uc.Chrome(executable_path=ChromeDriverManager().install(), options=options) as driver:
+# options.add_argument("--headless")
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('useAutomationExtension', False)
+
+with webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options) as driver:
+    driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'})
+    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+
+
     driver.get("https://www.savemart.com/stores/?coordinates=37.88151857835088,-100.44300299999999&zoom=5")
     html = driver.page_source
 
