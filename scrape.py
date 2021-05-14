@@ -14,7 +14,7 @@ options.add_argument("--disable-gpu")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--no-sandbox")
 options.add_argument("start-maximized")
-# options.add_argument("--headless")
+options.add_argument("--headless")
 
 with uc.Chrome(options=options) as driver:
     driver.get("https://www.savemart.com/stores/?coordinates=37.88151857835088,-100.44300299999999&zoom=5")
