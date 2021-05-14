@@ -26,7 +26,7 @@ options.add_experimental_option('useAutomationExtension', False)
 with SgChrome(executable_path=ChromeDriverManager().install(), is_headless=False, chrome_options=options).driver() as driver:
     driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'})
     driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-    driver.get("https://whatismyipaddress.com/")
+    driver.get("https://www.savemart.com/stores/?coordinates=37.88151857835088,-120.41105894999998&zoom=6")
     html = driver.page_source
 
     with open("file.txt", "w", encoding="utf-8") as output:
