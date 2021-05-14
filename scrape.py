@@ -1,41 +1,39 @@
 from sgselenium.sgselenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup as bs
-import pandas as pd
 import ssl
 import time
 ssl._create_default_https_context = ssl._create_unverified_context
 
 options = webdriver.ChromeOptions()
 
-options.add_argument("--remote-debugging-port=9222")
-options.add_argument("disable-infobars")
-options.add_argument("--disable-extensions")
-options.add_argument("--disable-gpu")
-options.add_argument("--disable-dev-shm-usage")
-options.add_argument("--no-sandbox")
-options.add_argument("start-maximized")
+# options.add_argument("--remote-debugging-port=9222")
+# options.add_argument("disable-infobars")
+# options.add_argument("--disable-extensions")
+# options.add_argument("--disable-gpu")
+# options.add_argument("--disable-dev-shm-usage")
+# options.add_argument("--no-sandbox")
+# options.add_argument("start-maximized")
 options.add_argument("--headless")
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option('useAutomationExtension', False)
+# options.add_experimental_option("excludeSwitches", ["enable-automation"])
+# options.add_experimental_option('useAutomationExtension', False)
 
 with webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options) as driver:
-    driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'})
-    driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+    # driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'})
+    # driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
 
-    driver.get("https://www.savemart.com/stores/?coordinates=37.88151857835088,-100.44300299999999&zoom=5")
+    driver.get("https://www.savemart.com/stores/?coordinates=37.88151857835088,-120.41105894999998&zoom=6")
     html = driver.page_source
 
     with open("file.txt", "w", encoding="utf-8") as output:
         print(html, file=output)
     print(html)
-    
     time.sleep(5)
 
 soup = bs(html, "html.parser")
 
-grids = soup.find("div", attrs={"class": "store-list__scroll-container"}).find_all("li")
+ip = soup.find("span", attrs={"id": "ipv4"}).find("a").text.strip()
 
-print(len(grids))
+print(ip)
 
