@@ -1,7 +1,7 @@
-import os
+# import os
 
-os.system("pip uninstall -y sgselenium")
-os.system("pip install sgselenium==0.0.15")
+# os.system("pip uninstall -y sgselenium")
+# os.system("pip install sgselenium==0.0.15")
 
 from bs4 import BeautifulSoup as bs
 from selenium.webdriver.common.by import By
