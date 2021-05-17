@@ -55,7 +55,7 @@ def get_driver(url, class_name, driver=None):
 
 
 class_name = "store-list__store"
-url = "https://www.savemart.com/stores/?coordinates=39.64096403685537,-112.39632159999998&zoom=5"
+url = "https://www.foodmaxx.com/stores/?coordinates=39.64096403685537,-112.39632159999998&zoom=5"
 driver = get_driver(url, class_name)
 soup = bs(driver.page_source, "html.parser")
 grids = soup.find("div", class_="store-list__scroll-container").find_all("li")
@@ -65,7 +65,7 @@ for grid in grids:
     name = grid.find("span", attrs={"class": "name"}).text.strip()
     number = grid.find("span", attrs={"class": "number"}).text.strip()
     page_url = (
-        "https://www.savemart.com/stores/"
+        "https://www.foodmaxx.com/stores/"
         + name.split("\n")[0].replace(" ", "-").replace(".", "").lower()
         + "-"
         + number.split("\n")[0].split("#")[-1]
@@ -90,7 +90,7 @@ for grid in grids:
 
     location_soup = bs(driver.page_source, "html.parser")
 
-    locator_domain = "savemart.com"
+    locator_domain = "foodmaxx.com"
     location_name = location_soup.find("meta", attrs={"property": "og:title"})[
         "content"
     ]
