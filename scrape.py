@@ -11,6 +11,8 @@ from sgselenium.sgselenium import SgChrome
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 
+print("here")
+
 locator_domains = []
 page_urls = []
 location_names = []
