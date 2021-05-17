@@ -50,6 +50,8 @@ def get_driver(url, class_name, driver=None):
             break
         except Exception:
             print("fail: " + str(x))
+            if x == 10:
+                return "FAIL"
             continue
     return driver
 
