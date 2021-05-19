@@ -68,7 +68,7 @@ for grid in grids:
         + "/"
         + grid["id"].split("-")[-1]
     )
-
+    print(page_url)
     try:
         driver.get(page_url)
         WebDriverWait(driver, 20).until(
@@ -87,7 +87,7 @@ for grid in grids:
     location_name = location_soup.find("meta", attrs={"property": "og:title"})[
         "content"
     ]
-
+    print(location_name)
     address = location_soup.find("meta", attrs={"property": "og:street-address"})[
         "content"
     ]
