@@ -45,6 +45,7 @@ def get_driver(url, class_name, driver=None):
             )
             break
         except Exception:
+            driver.quit()
             if x == 10:
                 return "FAIL"
             continue
