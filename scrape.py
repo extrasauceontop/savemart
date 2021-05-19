@@ -6,8 +6,6 @@ from sgselenium.sgselenium import SgChrome
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 
-print("here")
-
 locator_domains = []
 page_urls = []
 location_names = []
@@ -47,7 +45,6 @@ def get_driver(url, class_name, driver=None):
             )
             break
         except Exception:
-            print("fail: " + str(x))
             if x == 10:
                 return "FAIL"
             continue
@@ -55,24 +52,22 @@ def get_driver(url, class_name, driver=None):
 
 
 class_name = "store-list__store"
-url = "https://www.foodmaxx.com/stores/?coordinates=39.64096403685537,-112.39632159999998&zoom=5"
+url = "https://www.savemart.com/stores/?coordinates=39.64096403685537,-112.39632159999998&zoom=5"
 driver = get_driver(url, class_name)
 soup = bs(driver.page_source, "html.parser")
 grids = soup.find("div", class_="store-list__scroll-container").find_all("li")
 
-print(len(grids))
 for grid in grids:
     name = grid.find("span", attrs={"class": "name"}).text.strip()
     number = grid.find("span", attrs={"class": "number"}).text.strip()
     page_url = (
-        "https://www.foodmaxx.com/stores/"
+        "https://www.savemart.com/stores/"
         + name.split("\n")[0].replace(" ", "-").replace(".", "").lower()
         + "-"
         + number.split("\n")[0].split("#")[-1]
         + "/"
         + grid["id"].split("-")[-1]
     )
-    print(page_url)
 
     try:
         driver.get(page_url)
@@ -82,19 +77,17 @@ for grid in grids:
             )
         )
     except Exception:
-        print("Getting new driver")
         driver = get_driver(
             page_url, "store-details-store-hours__content", driver=driver
         )
-        print("Success")
 
     location_soup = bs(driver.page_source, "html.parser")
 
-    locator_domain = "foodmaxx.com"
+    locator_domain = "savemart.com"
     location_name = location_soup.find("meta", attrs={"property": "og:title"})[
         "content"
     ]
-    print(location_name)
+
     address = location_soup.find("meta", attrs={"property": "og:street-address"})[
         "content"
     ]
