@@ -59,7 +59,10 @@ while True:
     print("try: " + str(x))
     class_name = "store-list__scroll-container"
     url = "https://www.spring-market.com/stores/?coordinates=36.01301919805139,-124.22992541516308&zoom=4"
-    driver = get_driver(url, class_name)
+    if x == 1:
+        driver = get_driver(url, class_name)
+    else:
+        driver = get_driver(url, class_name, driver=driver)
     soup = bs(driver.page_source, "html.parser")
     grids = soup.find("div", class_="store-list__scroll-container").find_all("li")
     if len(grids) == 0:
