@@ -59,7 +59,6 @@ url = "https://www.spring-market.com/stores/?coordinates=39.64096403685537,-112.
 driver = get_driver(url, class_name)
 soup = bs(driver.page_source, "html.parser")
 grids = soup.find("div", class_="store-list__scroll-container").find_all("li")
-print(grids)
 
 for grid in grids:
     name = grid.find("span", attrs={"class": "name"}).text.strip()
@@ -90,6 +89,7 @@ for grid in grids:
     location_name = location_soup.find("meta", attrs={"property": "og:title"})[
         "content"
     ]
+    print(location_name)
     address = location_soup.find("meta", attrs={"property": "og:street-address"})[
         "content"
     ]
