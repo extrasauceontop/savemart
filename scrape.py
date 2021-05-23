@@ -53,14 +53,22 @@ def get_driver(url, class_name, driver=None):
             continue
     return driver
 
+x = 0
+while True:
+    x = x+1
+    print("try: " + str(x))
+    class_name = "store-list__scroll-container"
+    url = "https://www.spring-market.com/stores/?coordinates=36.01301919805139,-124.22992541516308&zoom=4"
+    driver = get_driver(url, class_name)
+    soup = bs(driver.page_source, "html.parser")
+    grids = soup.find("div", class_="store-list__scroll-container").find_all("li")
+    if len(grids) == 0:
+        continue
+    else:
+        break
 
-class_name = "store-list__scroll-container"
-url = "https://www.spring-market.com/stores/?coordinates=39.64096403685537,-112.39632159999998&zoom=1"
-driver = get_driver(url, class_name)
-soup = bs(driver.page_source, "html.parser")
-grids = soup.find("div", class_="store-list__scroll-container").find_all("li")
-print(soup.find("div", class_="store-list__scroll-container"))
-print(len(grids))
+
+
 for grid in grids:
     name = grid.find("span", attrs={"class": "name"}).text.strip()
     number = grid.find("span", attrs={"class": "number"}).text.strip()
