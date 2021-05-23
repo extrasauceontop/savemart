@@ -53,9 +53,10 @@ def get_driver(url, class_name, driver=None):
             continue
     return driver
 
+
 x = 0
 while True:
-    x = x+1
+    x = x + 1
     print("try: " + str(x))
     class_name = "store-preview__info"
     url = "https://www.spring-market.com/stores/?coordinates=36.01301919805139,-124.22992541516308&zoom=1"
@@ -69,7 +70,6 @@ while True:
         continue
     else:
         break
-
 
 
 for grid in grids:
