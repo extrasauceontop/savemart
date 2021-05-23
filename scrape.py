@@ -57,7 +57,7 @@ x = 0
 while True:
     x = x+1
     print("try: " + str(x))
-    class_name = "store-list__scroll-container"
+    class_name = "store-preview__info"
     url = "https://www.spring-market.com/stores/?coordinates=36.01301919805139,-124.22992541516308&zoom=1"
     if x == 1:
         driver = get_driver(url, class_name)
