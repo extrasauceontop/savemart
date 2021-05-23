@@ -40,7 +40,7 @@ def get_driver(url, class_name, driver=None):
             ).driver()
             driver.get(url)
 
-            WebDriverWait(driver, 20).until(
+            WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located((By.CLASS_NAME, class_name))
             )
             break
