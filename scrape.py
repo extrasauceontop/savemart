@@ -55,7 +55,7 @@ def get_driver(url, class_name, driver=None):
 
 
 class_name = "store-list__scroll-container"
-url = "https://www.spring-market.com/stores/?coordinates=32.29024040770592,-96.101997&zoom=7"
+url = "https://www.spring-market.com/stores/?coordinates=39.64096403685537,-112.39632159999998&zoom=1"
 driver = get_driver(url, class_name)
 soup = bs(driver.page_source, "html.parser")
 grids = soup.find("div", class_="store-list__scroll-container")
